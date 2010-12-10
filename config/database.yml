@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  username: osb
+  password: tohakVetOos0
+  host: localhost
+  port: 5432
+
+development:
+  database: osb_development
+  <<: *default
+
+test:
+  database: osb_test
+  <<: *default
+
