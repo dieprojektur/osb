@@ -1,0 +1,17 @@
+<ul>
+  <%= content_tag("li", :class => (current_page?(:controller => '/welcome', :action => 'index') ? 'active': nil) ) do -%>
+    <%= link_to " home", root_url %>
+  <% end -%>
+  <%= content_tag("li", :class => (current_page?(:controller => '/open_spaces', :action => 'new') ? 'active': nil) ) do -%>
+    <%= link_to " new openspace", new_open_space_url %>
+  <% end -%>
+  <li><a href="/about"> about</a></li>
+  <li><a href="/inquiry/new"> contact </a></li>
+  <% if user_signed_in? then %>
+    <li><%= link_to "sign out", destroy_user_session_url %></li>
+  <% else %>
+  <%= content_tag("li", :class => (current_page?(:action=>"new", :controller=>"devise/sessions") ? 'active': nil) ) do -%>
+    <%= link_to " sign in", new_user_session_url %>
+  <% end -%>
+  <% end %>
+</ul>

@@ -1,0 +1,39 @@
+<%= form_for(@open_space) do |f| %>
+  <% if @open_space.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@open_space.errors.count, "error") %> prohibited this open_space from being saved:</h2>
+
+      <ul>
+      <% @open_space.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= text_field_tag 'open_space[start]', l(@open_space.start), :class => 'datepicker' if @open_space.start %>
+    <%= f.text_field :start, :class => 'datepicker' unless @open_space.start %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br />
+    <%= text_field_tag 'open_space[end]', l(@open_space.end), :class => 'datepicker' if @open_space.end %>
+    <%= f.text_field :end, :class => 'datepicker' unless @open_space.end %>
+  </div>
+  <div class="field">
+    <%= f.check_box :allDay %>
+    <%= f.label :allDay, 'All Day?' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

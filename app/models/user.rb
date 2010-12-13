@@ -12,5 +12,7 @@ class User
 
   property :id, Serial
 
+  has n, :open_spaces
+
 
 end

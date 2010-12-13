@@ -1,7 +1,14 @@
 Osb::Application.routes.draw do
+
+  resources :open_spaces do
+    resources :tracks
+  end
+
   devise_for :admins
 
   devise_for :users
+
+  root :to => "welcome#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
