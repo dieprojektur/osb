@@ -18,6 +18,10 @@
 .fc .fc-content {
 	font-size: 1em;
 	}
+
+  .fc h2 {
+    font-size: 1.2em;
+  }
 	
 .fc {
 	direction: ltr;

@@ -9,3 +9,4 @@ en:
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
+      date: "%Y-%m-%d"

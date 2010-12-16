@@ -4,8 +4,9 @@ class OpenSpacesController < ApplicationController
   # GET /open_spaces
   # GET /open_spaces.xml
   def index
-    startdate = Time.at(params[:start].to_i)
-    enddate = Time.at(params[:end].to_i)
+    startdate = Time.at(params[:start].to_i) || 0
+    enddate = Time.at(params[:end].to_i) 
+    enddate = Time.now + 5.years if startdate == enddate 
     @open_spaces = current_user.open_spaces.all(:start.gte => startdate, :end.lte => enddate)
 
     respond_to do |format|
@@ -18,18 +19,25 @@ class OpenSpacesController < ApplicationController
   # GET /open_spaces/1
   # GET /open_spaces/1.xml
   def show
-    @open_space = OpenSpace.get(params[:id])
+    @open_space = current_user.open_spaces.get(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @open_space }
+      if (@open_space) then
+        format.html { render :layout => 'application' }
+        format.xml  { render :xml => @open_space }
+        format.json { render :json => @open_space }
+      else
+        format.html { render :text => "No such object", :status => 404}
+        format.xml  { render :xml => @open_space }
+        format.json { render :json => @open_space }
+      end
     end
   end
 
   # GET /open_spaces/new
   # GET /open_spaces/new.xml
   def new
-    @open_space = OpenSpace.new
+    @open_space = current_user.open_spaces.new
 
     respond_to do |format|
       format.html { render :layout => false }# new.html.erb
@@ -39,7 +47,18 @@ class OpenSpacesController < ApplicationController
 
   # GET /open_spaces/1/edit
   def edit
-    @open_space = OpenSpace.get(params[:id])
+    @open_space = current_user.open_spaces.get(params[:id])
+    respond_to do |format|
+      if (@open_space) then
+        format.html # edit.html.erb
+        format.xml  { render :xml => @open_space }
+        format.json { render :json => @open_space }
+      else
+        format.html { render :text => "No such object", :status => 404}
+        format.xml  { render :xml => @open_space }
+        format.json { render :json => @open_space }
+      end
+    end
   end
 
   # POST /open_spaces
@@ -48,7 +67,7 @@ class OpenSpacesController < ApplicationController
     @open_space = current_user.open_spaces.new(params[:open_space])
 
     respond_to do |format|
-      if @open_space.save
+      if (@open_space && @open_space.save)
         format.html { redirect_to(@open_space, :notice => 'Open space was successfully created.') }
         format.xml  { render :xml => @open_space, :status => :created, :location => @open_space }
         format.js   
@@ -63,7 +82,7 @@ class OpenSpacesController < ApplicationController
   # PUT /open_spaces/1
   # PUT /open_spaces/1.xml
   def update
-    @open_space = OpenSpace.get(params[:id])
+    @open_space = current_user.open_spaces.get(params[:id])
 
     respond_to do |format|
       if @open_space.update(params[:open_space])
@@ -81,7 +100,7 @@ class OpenSpacesController < ApplicationController
   # DELETE /open_spaces/1
   # DELETE /open_spaces/1.xml
   def destroy
-    @open_space = OpenSpace.get(params[:id])
+    @open_space = current_user.open_spaces.get(params[:id])
     @open_space.destroy
 
     respond_to do |format|

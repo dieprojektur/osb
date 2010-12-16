@@ -156,6 +156,40 @@ input, textarea, select {
 	background: url(/images/img02.gif) repeat-x left bottom;
 }
 
+/* Pseudo Menu */
+
+.pmenu {
+}
+
+.pmenu ul {
+	margin: 0;
+	padding: 15px 0 0 0;
+	list-style: none;
+}
+
+.pmenu li {
+	display: inline-block;
+  margin-left: 15px;
+}
+
+.pmenu a {
+	display: block;
+	float: left;
+	margin-left: 30px;
+	padding: 7px;
+	text-decoration: none;
+	font-size: 13px;
+	color: #000000;
+}
+
+.pmenu a:hover {
+	text-decoration: underline;
+}
+
+.pmenu .active a {
+	background: url(/images/img02.gif) repeat-x left bottom;
+}
+
 /* Page */
 
 #page {
@@ -314,7 +348,7 @@ html>body #footer {
 }
 
 #footer .wrap {
-	width: 850px;
+	width: 1050px;
 	margin: 0 auto;
 }
 
@@ -338,7 +372,7 @@ html>body #footer {
 }
 
 #fbox2 {
-	width: 200px;
+	width: 300px;
 	padding-left: 70px;
 }
 
@@ -346,3 +380,20 @@ html>body #footer {
 	width: 200px;
 	padding-left: 70px;
 }
+
+#trackwrap {
+  position: relative;
+  border: 1px solid black;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
+}
+
+.tracks {
+  display: inline-block;
+  border: 1px solid blue;
+  float: left;
+  width: 355px;
+}
+

@@ -1,22 +1,33 @@
-<p id="notice"><%= notice %></p>
+<% content_for :head do %>
+  <%= javascript_include_tag 'open_spaces.js' %>
+<% end -%>
+<ul class="pmenu">
+  <li><b>Title</b>: <%= @open_space.title -%></li>
+  <li><b>Location</b>: <%= @open_space.location -%></li>
+  <li><b>Start</b>: <%= l @open_space.start, :format => :date -%></li>
+  <li><b>End</b>: <%= l @open_space.end, :format => :date -%></li>
+</ul>
 
-<p>
-  <b>Title:</b>
-  <%= @open_space.title %>
-</p>
+<div id="trackwrap">
+  <div id="track1" class="tracks">
+  <h2>Track 1</h2>
+      
+  </div>
+  <div id="track2" class="tracks">
+  <h2>Track 2</h2>
+      
+  </div>
+  <div id="track3" class="tracks">
+  <h2>Track 3</h2>
+      
+  </div>
+  <div id="track4" class="tracks">
+  <h2>Track 4</h2>
+      
+  </div>
+  <div id="track5" class="tracks">
+  <h2>Track 5</h2>
+      
+  </div>
 
-<p>
-  <b>Location:</b>
-  <%= @open_space.location %>
-</p>
-
-<p>
-  <b>Starts on:</b>
-  <%= @open_space.start%>
-</p>
-
-<p>
-  <b>Ends on:</b>
-  <%= @open_space.end%>
-</p>
-
+</div>
