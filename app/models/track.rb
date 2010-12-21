@@ -7,5 +7,7 @@ class Track
   property :name, String
   property :location, String
   property :position, Integer
+  
+  belongs_to :open_space
 
 end

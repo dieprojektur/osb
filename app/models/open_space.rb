@@ -11,5 +11,13 @@ class OpenSpace
   property :allDay, Boolean
 
   belongs_to :user
+  
+  has n, :tracks
+
+  def each_day
+    Range.new(self.start, self.end).each { |day|
+      yield day
+    }
+  end
 
 end

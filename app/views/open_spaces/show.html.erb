@@ -8,26 +8,26 @@
   <li><b>End</b>: <%= l @open_space.end, :format => :date -%></li>
 </ul>
 
-<div id="trackwrap">
-  <div id="track1" class="tracks">
-  <h2>Track 1</h2>
-      
-  </div>
-  <div id="track2" class="tracks">
-  <h2>Track 2</h2>
-      
-  </div>
-  <div id="track3" class="tracks">
-  <h2>Track 3</h2>
-      
-  </div>
-  <div id="track4" class="tracks">
-  <h2>Track 4</h2>
-      
-  </div>
-  <div id="track5" class="tracks">
-  <h2>Track 5</h2>
-      
-  </div>
+<div id="trackmenu">
+  <button data-url-newtrack="<%= new_open_space_track_path(@open_space) %>">Add Track</button>
+</div>
+<div id="tabs">
+  <ul id="daytabs">
+    <% @open_space.each_day do |day| %>
+      <% daystr = day.strftime("%Y-%d-%m") %>
+      <%= content_tag("li", link_to(day.strftime("%A"), "#day_#{daystr}"))%>
+    <% end -%>
+  </ul>
+    <% @open_space.each_day do |day| %>
+      <% daystr = day.strftime("%Y-%d-%m") %>
+      <div id="day_<%= daystr %>">
+        <h2>Tracks:</h2>
+        <% @open_space.tracks.each do |track| %>
+          <div id="track_<%= track.id %>" class="tracks" data-track-id="<%= track.id %>" data-day="<%= day.strftime("%Y-%m-%d") %>" data-os-id="<%= @openspace.id %>">
+            <h2><%= track.title %></h2>
 
+          </div>
+        <% end -%>
+      </div>
+    <% end -%>
 </div>

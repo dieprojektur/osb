@@ -1,0 +1,7 @@
+.outerbutton {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  top: 1px;
+  bottom: 1px;
+}
