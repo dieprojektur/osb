@@ -47,6 +47,21 @@ namespace :deploy do
   task :fix_socket_permissions do
     run "setfacl -m 'user:www-data:rw' #{current_path}/tmp/unicorn.sock"
   end
+    task :migrate, :roles => :db, :only => { :primary => true } do
+    rake = fetch(:rake, "rake")
+    rails_env = fetch(:rails_env, "production")
+    migrate_env = fetch(:migrate_env, "")
+    migrate_target = fetch(:migrate_target, :latest)
+
+    directory = case migrate_target.to_sym
+      when :current then current_path
+      when :latest  then current_release
+      else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
+      end
+
+    puts "#{migrate_target} => #{directory}"
+    run "cd #{directory}; #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:autoupgrade"
+  end
 end
 
 namespace :bundler do
