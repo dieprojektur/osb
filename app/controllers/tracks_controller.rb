@@ -24,10 +24,11 @@ class TracksController < ApplicationController
   # GET /tracks/new
   # GET /tracks/new.xml
   def new
-    @track = Track.new
+    @open_space = current_user.open_spaces.get(params[:open_space_id])
+    @track = @open_space.tracks.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :layout => false }
       format.xml  { render :xml => @track }
     end
   end
@@ -40,7 +41,9 @@ class TracksController < ApplicationController
   # POST /tracks
   # POST /tracks.xml
   def create
-    @track = Track.new(params[:track])
+
+    @open_space = current_user.open_spaces.get(params[:open_space_id])
+    @track = @open_space.tracks.new(params[:track])
 
     respond_to do |format|
       if @track.save

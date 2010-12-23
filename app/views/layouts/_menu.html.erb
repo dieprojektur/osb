@@ -7,7 +7,7 @@
   <% end -%>
   <li><a href="/about"> about</a></li>
   <li><a href="/inquiry/new"> contact </a></li>
-  <% if user_signed_in? then %>
+  <% if user_signed_in? %>
     <li><%= link_to "sign out", destroy_user_session_url %></li>
   <% else %>
   <%= content_tag("li", :class => (current_page?(:action=>"new", :controller=>"devise/sessions") ? 'active': nil) ) do -%>

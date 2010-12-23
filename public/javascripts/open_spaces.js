@@ -4,10 +4,10 @@ $(document).ready(function() {
     icons: {primary: "ui-icon-plus"},
     text: 'Add Track'
   }).click(function() {
-    url = $(this).attr('data-url-newtrack');
+    var url = $(this).attr('data-url-newtrack');
     alert(url);
     var form = $('#dialog').dialog({
-      title: 'Add Event', 
+      title: 'Add Track', 
       modal: true
     }).load(url, function() {
       btn = form.find(':submit');
@@ -20,17 +20,18 @@ $(document).ready(function() {
           url: form.attr('action'),
           data: form.serialize(),
           dataType: 'script',
-          complete(function (xhr, status) {
+          complete: function (xhr, status) {
+          }
             
           });
         $(this).dialog('close');
         $(this).dialog('destroy');
-        };
-        buttons['Cancel'] = function() {
-          $(this).dialog('close');
-          $(this).dialog('destroy');
-        }
-        $(this).dialog('option', 'buttons', buttons);
+      };
+      buttons['Cancel'] = function() {
+        $(this).dialog('close');
+        $(this).dialog('destroy');
+      }
+      $(this).dialog('option', 'buttons', buttons);
     });
   });
 
